@@ -5,6 +5,6 @@ include 'function.php';
 // còn chưa đăng nhập thì điều hướng ra trang đăng nhập
 
 if (!isLogin()) {
-	header("location: dang_nhap.php");
+	header("location: src/dang_nhap.php");
 	exit();
 }
