@@ -24,26 +24,25 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap4.min.css">
     <!-- database table css link cdn -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="	sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="	sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
     <style>
-    main {
-        /*text-align: center;*/
-        padding: 5%;
-        overflow-x: auto;
-        min-height: 80vh;
-        font-family: 'Nunito', sans-serif;
-    }
+        main {
+            /*text-align: center;*/
+            padding: 5%;
+            overflow-x: auto;
+            min-height: 80vh;
+            font-family: 'Nunito', sans-serif;
+        }
 
-    section {
-        width: 100%;
-    }
+        section {
+            width: 100%;
+        }
 
-    td img {
-        max-width: 650px;
-    }
+        td img {
+            max-width: 650px;
+        }
     </style>
 </head>
 
@@ -77,13 +76,11 @@
 
 
             <div class="dropdown show">
-                <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Thêm Câu hỏi
                 </a>
                 <div class="dropdown-menu border-primary" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="cau_hoi_mot_dap_an.php?id_khoa_hoc=<?php echo $id_khoa_hoc; ?>"
-                        target="">Câu hỏi 1
+                    <a class="dropdown-item" href="cau_hoi_mot_dap_an.php?id_khoa_hoc=<?php echo $id_khoa_hoc; ?>" target="">Câu hỏi 1
                         đáp án</a>
                     <a class="dropdown-item" href=' cau_hoi_nhieu_dap_an.php' target="">Câu hỏi nhiều đáp án
                         đáp án</a>
@@ -117,50 +114,50 @@
     </main>
     <br><br><br>
     <style>
-    .footer-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 100px;
-        width: 100%;
-        padding: 15px;
-        /*background-color: #86b3f0;*/
-        /*background-color: #f8f9fa;*/
-        background-image: linear-gradient(180deg, hsla(214deg, 100%, 67%, .1), transparent 6rem);
-        flex-direction: column;
-    }
+        .footer-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100px;
+            width: 100%;
+            padding: 15px;
+            /*background-color: #86b3f0;*/
+            /*background-color: #f8f9fa;*/
+            background-image: linear-gradient(180deg, hsla(214deg, 100%, 67%, .1), transparent 6rem);
+            flex-direction: column;
+        }
 
-    .footer-left {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-    .footer-container p {
-        margin: 0 !important;
-        color: #737c83;
-        text-align: center;
-        /*font-weight: bold;*/
-        font-family: 'Nunito', sans-serif;
+        .footer-container p {
+            margin: 0 !important;
+            color: #737c83;
+            text-align: center;
+            /*font-weight: bold;*/
+            font-family: 'Nunito', sans-serif;
 
-    }
+        }
 
-    @media only screen and (max-width: 980px) {
-        .footer-container {}
-    }
+        @media only screen and (max-width: 980px) {
+            .footer-container {}
+        }
     </style>
     <footer>
         <?php include 'footer.php' ?>
     </footer>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-        $('#myTable1').DataTable({
-            responsive: true
+            $('#myTable1').DataTable({
+                responsive: true
+            });
+
+
         });
-
-
-    });
     </script>
 
 </body>
