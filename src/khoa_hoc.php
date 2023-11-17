@@ -42,7 +42,7 @@
 			    		            <img src="../images/khoahoc.jpg" class="card-img-top" alt="Course Image">
 			    		            <div class="card-body">
 			    		                <h5 class="card-title">' . $row["ten_khoa_hoc"] . '</h5>
-			    		                <a class="btn btn-primary" href="bai_giang.php?id_khoa_hoc=' . $row["id_khoa_hoc"] . '" >Truy cập</a>
+			    		                <a class="btn btn-primary" href="cau_hoi.php?id_khoa_hoc=' . $row["id_khoa_hoc"] . '" >Truy cập</a>
 			    		            </div>
 			    		        </div>
 			    		    </div>';
@@ -59,7 +59,7 @@
 			    			            <img src="../images/khoahoc.jpg" class="card-img-top" alt="Course Image">
 			    			            <div class="card-body">
 			    			                <h5 class="card-title">' . $row["ten_khoa_hoc"] . '</h5>
-			    			                <a class="btn btn-primary" href="bai_giang.php?id_khoa_hoc=' . $row["id_khoa_hoc"] . '">Truy cập</a>
+			    			                <a class="btn btn-primary" href="cau_hoi.php?id_khoa_hoc=' . $row["id_khoa_hoc"] . '">Truy cập</a>
 			    			            </div>
 			    			        </div>
 			    			    </div>';
