@@ -17,7 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="	sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <style>
+        <style>
         main {
             padding: 5%;
             overflow-x: auto;
@@ -62,8 +62,89 @@
                 }
             }
             ?>
+            <?php
+            if (isset($_POST['add_quiz'])) {
+
+                $username = $_SESSION['username'];
+                $ten_cau_hoi = $_POST['ten_cau_hoi'];
+                $muc_do = $_POST['level'];
+                $imgPath = null;
+                $addQuizSuccess = 0;
+
+
+                // Thêm câu hỏi vào bảng 'cau_hoi'
+                if (isset($_FILES['anh']['name'])) {
+                    $targetDirectory = "../uploads/";
+                    
+                    $uploadCheck = 1;
+                    $imgFileType = strtolower(pathinfo($_FILES['anh']['name'],PATHINFO_EXTENSION));
+                    $imgType = array("jpg", "jpeg", "png", "gif");
+                    if(!in_array($imgFileType, $imgType)){
+                        $uploadCheck =0;
+                        echo "Chỉ cho phép tải lên các định dạng JPG, JPEG, PNG và GIF.";
+                    }
+                    if($uploadCheck){
+                        $i = 1;
+                        $newFileName = $_FILES['anh']['name'];
+                        
+                        while (file_exists($targetDirectory . $newFileName)) {
+                            $newFileName = pathinfo($_FILES['anh']['name'], PATHINFO_FILENAME) . "($i)." . $imgFileType;
+                            $i++;
+                        }
+                        
+                        $uploadOk = move_uploaded_file($_FILES['anh']['tmp_name'], $targetDirectory . $newFileName);
+                        if($uploadOk){
+                            $imgPath = $targetDirectory . basename($_FILES["anh"]["name"]);
+                        }
+                        
+                        
+                    }
+                    
+
+                }
+
+                if (!empty($ten_cau_hoi) && !empty($_POST['flag'])) {
+                    $query_insert_cau_hoi = "INSERT INTO `cau_hoi` (`id_khoa_hoc`, `ten_cau_hoi`, `anh`, `muc_do`, `loai_cau_hoi`, `nguoi_them`) 
+                                        VALUES ('$id_khoa_hoc', '$ten_cau_hoi', '$imgPath', '$muc_do', 'mot lua chon', '$username')";
+                    $result_insert_cau_hoi = mysqli_query($conn, $query_insert_cau_hoi);
+
+
+
+                    if ($result_insert_cau_hoi) {
+                        $id_cau_hoi = mysqli_insert_id($conn);
+
+                        // Thêm các đáp án vào bảng 'dap_an'
+                        for ($i = 1; $i <= $_POST['sl_input']; $i++) {
+                            $ten_dap_an = $_POST["dap_an$i"];
+                            $dap_an_dung = ($_POST['flag'] == $i) ? 1 : 0;
+
+                            $query_insert_dap_an = "INSERT INTO `dap_an` (`id_cau_hoi`, `ten_dap_an`, `dap_an_dung`)
+                                                VALUES ('$id_cau_hoi', '$ten_dap_an', '$dap_an_dung')";
+
+                            $result = mysqli_query($conn, $query_insert_dap_an);
+                            if($result && $i == $_POST['sl_input']){
+                                $addQuizSuccess = 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            ?>
+            <script>
+                // Kiểm tra xem biểu mẫu đã được gửi hay chưa khi trang tải
+                if (window.history.replaceState) {
+                    window.history.replaceState(null, null, window.location.href);
+                }
+            </script>
+
 
             <form method="POST" action="" enctype="multipart/form-data">
+                <?php if (isset($addQuizSuccess) && $addQuizSuccess): ?>
+                    <div class="alert alert-success" role="alert">
+                        Câu hỏi đã được thêm thành công!
+                    </div>
+                <?php  endif; ?>
                 <div class="form-group">
                     <label for="name_quiz">Nhập tên câu hỏi</label>
                     <input type="text" required="required" class="form-control" id="name_quiz" name="ten_cau_hoi">
@@ -108,40 +189,7 @@
             </form>
 
             <!-- xử lí add csdl -->
-            <?php
-            if (isset($_POST['add_quiz'])) {
-
-                $username = $_SESSION['username'];
-                $ten_cau_hoi = $_POST['ten_cau_hoi'];
-                $muc_do = $_POST['level'];
-                $anh = null;
-                // Thêm câu hỏi vào bảng 'cau_hoi'
-
-                if (!empty($ten_cau_hoi) && !empty($_POST['flag'])) {
-                    $query_insert_cau_hoi = "INSERT INTO `cau_hoi` (`id_khoa_hoc`, `ten_cau_hoi`, `anh`, `muc_do`, `loai_cau_hoi`, `nguoi_them`) 
-                                        VALUES ('$id_khoa_hoc', '$ten_cau_hoi', '$anh', '$muc_do', 'mot lua chon', '$username')";
-                    $result_insert_cau_hoi = mysqli_query($conn, $query_insert_cau_hoi);
-
-
-
-                    if ($result_insert_cau_hoi) {
-                        $id_cau_hoi = mysqli_insert_id($conn);
-
-                        // Thêm các đáp án vào bảng 'dap_an'
-                        for ($i = 1; $i <= $_POST['sl_input']; $i++) {
-                            $ten_dap_an = $_POST["dap_an$i"];
-                            $dap_an_dung = ($_POST['flag'] == $i) ? 1 : 0;
-
-                            $query_insert_dap_an = "INSERT INTO `dap_an` (`id_cau_hoi`, `ten_dap_an`, `dap_an_dung`)
-                                                VALUES ('$id_cau_hoi', '$ten_dap_an', '$dap_an_dung')";
-
-                            mysqli_query($conn, $query_insert_dap_an);
-                        }
-                    } else echo "vui lòng nhập đầy đủ";
-                }
-            }
-
-            ?>
+            
 
 
 

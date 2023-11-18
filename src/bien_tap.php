@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm câu hỏi</title>
+    <title>Biên tập</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -80,7 +80,7 @@
                     Thêm Câu hỏi
                 </a>
                 <div class="dropdown-menu border-primary" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="cau_hoi_mot_dap_an.php?id_khoa_hoc=<?php echo $id_khoa_hoc; ?>" target="">Câu hỏi 1
+                    <a class="dropdown-item" href="cau_hoi_mot_dap_an.php?id_khoa_hoc=<?php echo $id_khoa_hoc; ?>" target="_blank">Câu hỏi 1
                         đáp án</a>
                     <a class="dropdown-item" href=' cau_hoi_nhieu_dap_an.php' target="">Câu hỏi nhiều đáp án
                         đáp án</a>
