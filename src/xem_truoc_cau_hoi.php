@@ -35,6 +35,7 @@
         <?php
         include '../connectdb.php';
         $id_khoa_hoc = $_GET['id_khoa_hoc'];
+        $id_cau_hoi = $_GET['id_cau_hoi'];
         $query = "SELECT * FROM khoa_hoc WHERE id_khoa_hoc = $id_khoa_hoc";
         $result = mysqli_query($conn, $query);
 
@@ -48,24 +49,42 @@
                     </div>';
             }
         }
+        $query = "SELECT * FROM cau_hoi WHERE id_khoa_hoc = $id_khoa_hoc AND id_cau_hoi = $id_cau_hoi";
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            $row1 = mysqli_fetch_assoc($result);
+            $ten_cau_hoi = $row1['ten_cau_hoi'];
+            $imgPath = $row1['anh'];
+            $loai_cau_hoi = $row1['loai_cau_hoi'];
+        }
         ?>
-        <div style="margin: 20px 30%;">
+        <div class="d-flex justify-content-center" style="margin: 20px 30%;">
             <!-- tên câu hỏi -->
             <div class="form-group">
                 <label for="name_quiz">
-                    <h4>Câu hỏi: eyurk</h4>
+                    <h4><?php if(isset($row1)){echo $ten_cau_hoi;}?></h4>
                 </label>
             </div>
             <!-- ảnh câu hỏi -->
             <div class="form-group">
-                <img src='../images/560606.jpg' height='200px'>
+                <img src='<?php if(isset($row1)){echo $imgPath;}?>' height='200px'>
             </div>
             <!-- đáp án -->
-            <div style='margin: 20px 0 0 0;' class='input-group mb-3'>
-                <div class='input-group-text'>
-                    <input name='' value='' checked type='checkbox' readonly>
-                </div>
-                <input name='' type='text' class='form-control' value='gs' readonly>
+            <div class="">
+                <?php
+                $query = "SELECT * FROM dap_an WHERE id_cau_hoi = $id_cau_hoi";
+                $result = mysqli_query($conn, $query);
+                 if($loai_cau_hoi == "single_choice"){
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row2 = mysqli_fetch_assoc($result)) {
+                    ?>
+               
+                    <div class="form-check form-check-column">
+                        <input class="form-check-input" type="radio" value="" id="flexCheckDefault" name="flag">
+                        <label class="form-check-label" for="flexRadioDefault1"><?php echo $row2['ten_dap_an']; ?></label>
+                    </div><br>
+                <?php }}}?>
             </div>
 
 

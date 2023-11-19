@@ -106,7 +106,7 @@
                 }
                 if (!empty($ten_cau_hoi) && !empty($_POST['flag']) && $uploadCheck == 1) {
                     $query_insert_cau_hoi = "INSERT INTO `cau_hoi` (`id_khoa_hoc`, `ten_cau_hoi`, `anh`, `muc_do`, `loai_cau_hoi`, `nguoi_them`) 
-                                        VALUES ('$id_khoa_hoc', '$ten_cau_hoi', '$imgPath', '$muc_do', 'mot lua chon', '$username')";
+                                        VALUES ('$id_khoa_hoc', '$ten_cau_hoi', '$imgPath', '$muc_do', 'single_choice', '$username')";
                     $result_insert_cau_hoi = mysqli_query($conn, $query_insert_cau_hoi);
 
 
